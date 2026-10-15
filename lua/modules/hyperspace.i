@@ -716,13 +716,6 @@ playerVariableType playerVariables;
 %rename("%s") TopScore;
 %rename("%s") TopScore::sector;
 %rename("%s") TopScore::score;
-// ftl-bench
-%immutable TopScore::victory;
-%rename("%s") TopScore::victory;
-%immutable TopScore::difficulty;
-%rename("%s") TopScore::difficulty;
-%immutable TopScore::advancedContent;
-%rename("%s") TopScore::advancedContent;
 
 %nodefaultctor Sector;
 %rename("%s") Sector;
@@ -751,15 +744,15 @@ playerVariableType playerVariables;
 %rename("%s") CApp::OnKeyUp;
 %rename("%s") CApp::OnLButtonDown;
 %rename("%s") CApp::OnLButtonUp;
-%rename("%s") CApp::OnMButtonDown;
+//%rename("%s") CApp::OnMButtonDown;
 //%rename("%s") CApp::OnMButtonUp; // OnMButtonUp only exists in CEvent and is referenced in the vtable, maybe it could be extended and made available if needed, same with OnMouseWheel & OnWindowResize
 %rename("%s") CApp::OnMouseMove;
-%rename("%s") CApp::OnRButtonDown;
-%rename("%s") CApp::OnRButtonUp;
+//%rename("%s") CApp::OnRButtonDown;
+//%rename("%s") CApp::OnRButtonUp;
 //%rename("%s") CApp::OnRequestExit; // Maybe use this for game cleanup? Not sure if this is called right before exiting the game
 //%rename("%s") CApp::OnTextEvent;
 //%rename("%s") CApp::OnTextInput;
-%rename("%s") CApp::TranslateMouse;
+//%rename("%s") CApp::TranslateMouse;
 
 %rename("%s") CApp::gui; // Maybe we only allow access to the command gui via WorldManager and just hide the CApp implementation by something that gives us access to WorldManager like below?
 %rename("%s") CApp::world;
