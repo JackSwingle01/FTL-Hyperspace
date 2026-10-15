@@ -326,6 +326,7 @@ namespace std {
     %template(pair_int_int) pair<int, int>;
     %template(pair_float_float) pair<float, float>;
     %template(vector_Pointf) vector<Pointf>;
+    %template(vector_StoreBox) vector<StoreBox*>; // ftl-bench
     %template(vector_Point) vector<Point>;
     %template(map_string_int) map<string,int>;
     %template(map_int_SystemTemplate) map<int,ShipBlueprint::SystemTemplate>;
@@ -966,7 +967,9 @@ playerVariableType playerVariables;
 %rename("%s") LocationEvent::repair;
 
 %rename("%s") LocationEvent::modifyPursuit;
-//%rename("%s") LocationEvent::pStore; Store not exposed
+// ftl-bench: the store at this location
+%immutable LocationEvent::pStore;
+%rename("%s") LocationEvent::pStore;
 //%rename("%s") LocationEvent::damage; EventDamage not exposed
 %rename("%s") LocationEvent::quest;
 //%rename("%s") LocationEvent::statusEffects; StatusEffect not exposed
@@ -2838,7 +2841,71 @@ We can expose them once the root cause is identified and the crash is fixed.
 %rename("%s") BlueprintManager::GetDroneBlueprint;
 %rename("%s") BlueprintManager::GetShipBlueprint;
 %rename("%s") BlueprintManager::GetWeaponBlueprint;
+%rename("%s") BlueprintManager::GetSystemBlueprint; // ftl-bench: system upgrade costs
 %rename("%s") BlueprintManager::GetBlueprintList;
+
+// ftl-bench: stores, system upgrade costs and the reactor upgrade (store and upgrades for the Agent)
+%nodefaultctor SystemBlueprint;
+%nodefaultdtor SystemBlueprint;
+%rename("%s") SystemBlueprint;
+%immutable SystemBlueprint::maxPower;
+%rename("%s") SystemBlueprint::maxPower;
+%immutable SystemBlueprint::upgradeCosts;
+%rename("%s") SystemBlueprint::upgradeCosts;
+
+%nodefaultctor Store;
+%nodefaultdtor Store;
+%rename("%s") Store;
+%immutable Store::vStoreBoxes;
+%rename("%s") Store::vStoreBoxes;
+%immutable Store::vItemBoxes;
+%rename("%s") Store::vItemBoxes;
+%rename("%s") Store::Close;
+
+%nodefaultctor StoreBox;
+%nodefaultdtor StoreBox;
+%rename("%s") StoreBox;
+%immutable StoreBox::itemId;
+%rename("%s") StoreBox::itemId;
+%immutable StoreBox::count;
+%rename("%s") StoreBox::count;
+%immutable StoreBox::desc;
+%rename("%s") StoreBox::desc;
+%immutable StoreBox::pBlueprint;
+%rename("%s") StoreBox::pBlueprint;
+%immutable StoreBox::bEquipmentBox;
+%rename("%s") StoreBox::bEquipmentBox;
+%rename("%s") StoreBox::Purchase;
+%rename("%s") StoreBox::CanHold;
+
+%nodefaultctor ReactorButton;
+%nodefaultdtor ReactorButton;
+%rename("%s") ReactorButton;
+%immutable ReactorButton::tempUpgrade;
+%rename("%s") ReactorButton::tempUpgrade;
+%rename("%s") ReactorButton::OnClick;
+%rename("%s") ReactorButton::Accept;
+%rename("%s") ReactorButton::GetUpgradeCost;
+%extend ReactorButton {
+    // Price of the next reactor bar, the same formula as the ReactorButton::OnClick hook
+    // (CustomReactor.cpp). -1 when the reactor is at its maximum.
+    int GetUpgradeCost() {
+        const CustomShipDefinition &def = CustomShipSelect::GetInstance()->GetDefinition($self->ship->myBlueprint.blueprintName);
+        int level = PowerManager::GetPowerManager(0)->currentPower.second + $self->tempUpgrade;
+        if (level >= def.maxReactorLevel) return -1;
+        int column = level / 5 + 1;
+        if (column < (int)def.reactorPrices.size() && def.reactorPrices[column] >= 0) return def.reactorPrices[column];
+        return def.reactorPrices[0] + (column - 1) * def.reactorPriceIncrement;
+    }
+}
+
+%nodefaultctor Upgrades;
+%nodefaultdtor Upgrades;
+%rename("%s") Upgrades;
+%immutable Upgrades::reactorButton;
+%rename("%s") Upgrades::reactorButton;
+%immutable CommandGui::upgradeScreen;
+%rename("%s") CommandGui::upgradeScreen;
 
 %nodefaultctor AugmentBlueprint;
 %nodefaultdtor AugmentBlueprint;
