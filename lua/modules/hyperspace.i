@@ -716,6 +716,13 @@ playerVariableType playerVariables;
 %rename("%s") TopScore;
 %rename("%s") TopScore::sector;
 %rename("%s") TopScore::score;
+// ftl-bench
+%immutable TopScore::victory;
+%rename("%s") TopScore::victory;
+%immutable TopScore::difficulty;
+%rename("%s") TopScore::difficulty;
+%immutable TopScore::advancedContent;
+%rename("%s") TopScore::advancedContent;
 
 %nodefaultctor Sector;
 %rename("%s") Sector;
@@ -739,7 +746,7 @@ playerVariableType playerVariables;
 // TODO: We could even use metatables to set __call of `input.onKeyDown` table to be the register function and `__getitem__` & `__setitem__` to allow `input.onKeyDown[index]` to access & delete registered handlers and then repeat the pattern for other event handlers? Or maybe just the __index & __newindex of it for named event handlers although representing the ordered nature of it might be harder that way.
 %rename("%s") CApp::OnExit; // close game, autosave profile and settings but not current run (current run will be on previous autosave)
 %rename("%s") CApp::OnRequestExit; // close game, autosave run, profile, and settings
-/*
+// ftl-bench: input functions enabled so mods can press menu buttons in-game.
 %rename("%s") CApp::OnKeyDown;
 %rename("%s") CApp::OnKeyUp;
 %rename("%s") CApp::OnLButtonDown;
@@ -750,10 +757,10 @@ playerVariableType playerVariables;
 %rename("%s") CApp::OnRButtonDown;
 %rename("%s") CApp::OnRButtonUp;
 //%rename("%s") CApp::OnRequestExit; // Maybe use this for game cleanup? Not sure if this is called right before exiting the game
-%rename("%s") CApp::OnTextEvent;
-%rename("%s") CApp::OnTextInput;
+//%rename("%s") CApp::OnTextEvent;
+//%rename("%s") CApp::OnTextInput;
 %rename("%s") CApp::TranslateMouse;
-*/
+
 %rename("%s") CApp::gui; // Maybe we only allow access to the command gui via WorldManager and just hide the CApp implementation by something that gives us access to WorldManager like below?
 %rename("%s") CApp::world;
 %immutable CApp::menu;
@@ -778,6 +785,11 @@ playerVariableType playerVariables;
 %rename("%s") MainMenu;
 %immutable MainMenu::bOpen;
 %rename("%s") MainMenu::bOpen;
+// ftl-bench: menu buttons, so the dev launcher can start or continue a Run.
+%immutable MainMenu::continueButton;
+%rename("%s") MainMenu::continueButton;
+%immutable MainMenu::startButton;
+%rename("%s") MainMenu::startButton;
 %immutable MainMenu::shipBuilder;
 %rename("%s") MainMenu::shipBuilder;
 
@@ -855,6 +867,9 @@ playerVariableType playerVariables;
 %rename("%s") ShipBuilder;
 %immutable ShipBuilder::bOpen;
 %rename("%s") ShipBuilder::bOpen;
+// ftl-bench
+%immutable ShipBuilder::startButton;
+%rename("%s") ShipBuilder::startButton;
 
 %nodefaultctor CommandGui;
 %nodefaultdtor CommandGui;
@@ -909,6 +924,16 @@ playerVariableType playerVariables;
 %rename("%s") Equipment::AddWeapon;
 %rename("%s") Equipment::GetCargoHold;
 
+// ftl-bench: game over and victory
+%immutable CommandGui::gameover;
+%rename("%s") CommandGui::gameover;
+%immutable CommandGui::alreadyWon;
+%rename("%s") CommandGui::alreadyWon;
+%immutable CommandGui::gameOverScreen;
+%rename("%s") CommandGui::gameOverScreen;
+%rename("%s") GameOver;
+%immutable GameOver::bVictory;
+%rename("%s") GameOver::bVictory;
 %rename("%s") CommandGui::bHideUI; // Not sure if we should disallow setting this
 %rename("%s") CommandGui::choiceBox;
 %immutable CommandGui::choiceBox;
