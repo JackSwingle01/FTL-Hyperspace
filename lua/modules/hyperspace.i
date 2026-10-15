@@ -722,6 +722,11 @@ playerVariableType playerVariables;
 %rename("%s") Sector::visited;
 %immutable Sector::level;
 %rename("%s") Sector::level;
+// ftl-bench: next-sector choices
+%immutable Sector::neighbors;
+%rename("%s") Sector::neighbors;
+%immutable Sector::type;
+%rename("%s") Sector::type;
 %immutable Sector::description;
 %rename("%s") Sector::description;
 
@@ -1388,6 +1393,13 @@ We can expose them once the root cause is identified and the crash is fixed.
 %rename("%s") StarMap::worldLevel;
 %rename("%s") StarMap::bChoosingNewSector;
 %rename("%s") StarMap::bSecretSector;
+// ftl-bench: jumping, sector choice and the fleet's advance
+%rename("%s") StarMap::readyToTravel;
+%rename("%s") StarMap::finalSectorChoice;
+%rename("%s") StarMap::NeighboringSector;
+%immutable StarMap::dangerZoneRadius;
+%rename("%s") StarMap::dangerZoneRadius;
+%rename("%s") StarMap::GetNextDangerMove;
 %rename("%s") StarMap::bTutorialGenerated;
 
 
@@ -1543,6 +1555,9 @@ We can expose them once the root cause is identified and the crash is fixed.
 %rename("%s") Location::planet;
 %rename("%s") Location::space;
 %rename("%s") Location::fleetChanging;
+// ftl-bench: quest markers
+%immutable Location::questLoc;
+%rename("%s") Location::questLoc;
 %rename("%s") Location::planetImage;
 %rename("%s") Location::spaceImage;
 
