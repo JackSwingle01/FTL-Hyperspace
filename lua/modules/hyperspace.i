@@ -723,8 +723,6 @@ playerVariableType playerVariables;
 %immutable Sector::level;
 %rename("%s") Sector::level;
 // ftl-bench: next-sector choices
-%immutable Sector::neighbors;
-%rename("%s") Sector::neighbors;
 %immutable Sector::type;
 %rename("%s") Sector::type;
 %immutable Sector::description;
