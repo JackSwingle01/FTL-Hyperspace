@@ -1248,7 +1248,9 @@ playerVariableType playerVariables;
 ////%rename("%s") WorldManager::ModifyEnvironment;
 ////%rename("%s") WorldManager::HostileEnvironment;
 ////%rename("%s") WorldManager::ModifyStatusEffect;
-//%rename("%s") WorldManager::playerShip; // TODO: See above, maybe want to extract functionality of this into proxied calls from `ships.player`?
+// ftl-bench: the player CompleteShip, for teleporting crew to a chosen room
+%immutable WorldManager::playerShip;
+%rename("%s") WorldManager::playerShip; // TODO: See above, maybe want to extract functionality of this into proxied calls from `ships.player`?
 //%rename("%s") WorldManager::bossShip; // TODO: Same as above except proxied calls from `ships.enemy` maybe and only if the boss ship is available?
 %rename("%s") WorldManager::space;
 %immutable WorldManager::space;
@@ -2034,6 +2036,7 @@ We can expose them once the root cause is identified and the crash is fixed.
 %nodefaultdtor MindSystem;
 %rename("%s") MindSystem;
 %rename("%s") MindSystem::SetArmed;
+%rename("%s") MindSystem::InitiateMindControl; // ftl-bench
 %rename("%s") MindSystem::SetHackingLevel;
 %rename("%s") MindSystem::controlTimer;
 %rename("%s") MindSystem::bCanUse;
@@ -2061,6 +2064,7 @@ We can expose them once the root cause is identified and the crash is fixed.
 %nodefaultdtor HackingSystem;
 %rename("%s") HackingSystem;
 %rename("%s") HackingSystem::BlowHackingDrone;
+%rename("%s") HackingSystem::SetArmed; // ftl-bench
 %rename("%s") HackingSystem::bHacking;
 %rename("%s") HackingSystem::drone;
 %rename("%s") HackingSystem::bBlocked;
@@ -2845,6 +2849,12 @@ We can expose them once the root cause is identified and the crash is fixed.
 %rename("%s") BlueprintManager::GetBlueprintList;
 
 // ftl-bench: stores, system upgrade costs and the reactor upgrade (store and upgrades for the Agent)
+// ftl-bench: teleport crew to (TELE_LEAVE = 1) or back from (TELE_ARRIVE = 2) a chosen room
+%nodefaultctor CompleteShip;
+%nodefaultdtor CompleteShip;
+%rename("%s") CompleteShip;
+%rename("%s") CompleteShip::InitiateTeleport;
+
 %nodefaultctor SystemBlueprint;
 %nodefaultdtor SystemBlueprint;
 %rename("%s") SystemBlueprint;
