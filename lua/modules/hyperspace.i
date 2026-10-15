@@ -2114,6 +2114,9 @@ We can expose them once the root cause is identified and the crash is fixed.
 %nodefaultdtor WeaponSystem;
 %rename("%s") WeaponSystem;
 %rename("%s") WeaponSystem::RemoveWeapon;
+// ftl-bench: power weapons the way the UI does (reactor and system power accounting)
+%rename("%s") WeaponSystem::PowerWeapon;
+%rename("%s") WeaponSystem::DePowerWeapon;
 %rename("%s") WeaponSystem::SetBonusPower;
 %rename("%s") WeaponSystem::target;
 %rename("%s") WeaponSystem::weapons;
@@ -2131,6 +2134,8 @@ We can expose them once the root cause is identified and the crash is fixed.
 %nodefaultdtor DroneSystem;
 %rename("%s") DroneSystem;
 %rename("%s") DroneSystem::DePowerDrone;
+// ftl-bench
+%rename("%s") DroneSystem::PowerDrone;
 %rename("%s") DroneSystem::RemoveDrone;
 %rename("%s") DroneSystem::SetBonusPower;
 %rename("%s") DroneSystem::drones;
