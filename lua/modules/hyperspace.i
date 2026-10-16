@@ -327,6 +327,7 @@ namespace std {
     %template(pair_float_float) pair<float, float>;
     %template(vector_Pointf) vector<Pointf>;
     %template(vector_StoreBox) vector<StoreBox*>; // ftl-bench
+    %template(vector_SystemBox) vector<SystemBox*>; // ftl-bench
     %template(vector_Point) vector<Point>;
     %template(map_string_int) map<string,int>;
     %template(map_int_SystemTemplate) map<int,ShipBlueprint::SystemTemplate>;
@@ -2357,6 +2358,12 @@ We can expose them once the root cause is identified and the crash is fixed.
 %nodefaultctor SystemBox;
 %rename("%s") SystemBox;
 %rename("%s") SystemBox::pSystem;
+%rename("%s") SystemBox::GenerateTooltip; // ftl-bench: a system's hover text
+%nodefaultctor SystemControl; // ftl-bench: the player's system boxes, for their hover text
+%nodefaultdtor SystemControl;
+%rename("%s") SystemControl;
+%immutable SystemControl::sysBoxes;
+%rename("%s") SystemControl::sysBoxes;
 %rename("%s") SystemBox::location;
 %rename("%s") SystemBox::bPlayerUI;
 
