@@ -942,6 +942,8 @@ playerVariableType playerVariables;
 %rename("%s") Equipment::AddToCargo;
 %rename("%s") Equipment::AddWeapon;
 %rename("%s") Equipment::GetCargoHold;
+%immutable Equipment::infoBox; // ftl-bench: always there, filled per item to read its hover text
+%rename("%s") Equipment::infoBox;
 
 // ftl-bench: game over and victory
 %immutable CommandGui::gameover;
