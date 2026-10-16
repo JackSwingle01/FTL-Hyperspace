@@ -2947,6 +2947,7 @@ We can expose them once the root cause is identified and the crash is fixed.
 %nodefaultctor WeaponBlueprint;
 %nodefaultdtor WeaponBlueprint;
 %rename("%s") WeaponBlueprint;
+%rename("%s") WeaponBlueprint::GetDescription; // ftl-bench: the store tooltip text
 %rename("%s") WeaponBlueprint::BoostPower;
 %rename("%s") WeaponBlueprint::BoostPower::type;
 %rename("%s") WeaponBlueprint::BoostPower::amount;
