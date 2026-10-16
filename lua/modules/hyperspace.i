@@ -790,6 +790,17 @@ playerVariableType playerVariables;
 %immutable MainMenu::shipBuilder;
 %rename("%s") MainMenu::shipBuilder;
 
+// ftl-bench: windows the bridge checks are open (their bOpen comes from FocusWindow)
+%nodefaultctor MenuScreen;
+%nodefaultdtor MenuScreen;
+%rename("%s") MenuScreen;
+%nodefaultctor OptionsScreen;
+%nodefaultdtor OptionsScreen;
+%rename("%s") OptionsScreen;
+%nodefaultctor InputBox;
+%nodefaultdtor InputBox;
+%rename("%s") InputBox;
+
 %nodefaultctor TabbedWindow;
 %nodefaultdtor TabbedWindow;
 %rename("%s") TabbedWindow;
@@ -913,6 +924,14 @@ playerVariableType playerVariables;
 %immutable CommandGui::equipScreen;
 %rename("%s") CommandGui::shipScreens; // ftl-bench: the ship-info window that holds the upgrades tab
 %immutable CommandGui::shipScreens;
+%rename("%s") CommandGui::storeScreens; // ftl-bench: the store's tabbed window
+%immutable CommandGui::storeScreens;
+%rename("%s") CommandGui::menuBox; // ftl-bench: the pause menu (FocusWindow)
+%immutable CommandGui::menuBox;
+%rename("%s") CommandGui::optionsBox; // ftl-bench
+%immutable CommandGui::optionsBox;
+%rename("%s") CommandGui::inputBox; // ftl-bench: the console input box
+%immutable CommandGui::inputBox;
 
 %nodefaultctor Equipment;
 %nodefaultdtor Equipment;
