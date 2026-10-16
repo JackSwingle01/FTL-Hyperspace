@@ -2892,6 +2892,16 @@ We can expose them once the root cause is identified and the crash is fixed.
 %immutable Store::vItemBoxes;
 %rename("%s") Store::vItemBoxes;
 %rename("%s") Store::Close;
+%immutable Store::infoBox; // ftl-bench: the store's hover box, filled per item to read its tooltip text
+%rename("%s") Store::infoBox;
+%nodefaultctor InfoBox;
+%nodefaultdtor InfoBox;
+%rename("%s") InfoBox;
+%rename("%s") InfoBox::SetBlueprint;
+%rename("%s") InfoBox::SetSystemId;
+%rename("%s") InfoBox::Clear;
+%immutable InfoBox::desc;
+%rename("%s") InfoBox::desc;
 
 %nodefaultctor StoreBox;
 %nodefaultdtor StoreBox;
