@@ -911,6 +911,8 @@ playerVariableType playerVariables;
 
 %rename("%s") CommandGui::equipScreen;
 %immutable CommandGui::equipScreen;
+%rename("%s") CommandGui::shipScreens; // ftl-bench: the ship-info window that holds the upgrades tab
+%immutable CommandGui::shipScreens;
 
 %nodefaultctor Equipment;
 %nodefaultdtor Equipment;
